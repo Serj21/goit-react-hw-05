@@ -35,29 +35,40 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <Link to={previousLocation}>Go back</Link>
-      <h1>{movieDetails.title}</h1>
-      {movieDetails.poster_path && (
-        <img
-          src={`https://image.tmdb.org/t/p/w200${movieDetails.poster_path}`}
-          alt={`${movieDetails.title} poster`}
-        />
-      )}
-      <p>
-        <strong>Rating:</strong> {movieDetails.vote_average}
-      </p>
-      <p>
-        <strong>Genre:</strong>{" "}
-        {movieDetails.genres.map((genre) => genre.name).join(", ")}
-      </p>
-      <p>
-        <strong>Overview:</strong> {movieDetails.overview}
-      </p>
-
-      <div>
-        <Link to="cast">Cast</Link>
+      <Link to={previousLocation} style={{ margin: "20px" }}>
+        Go back
+      </Link>
+      <div style={{ display: "flex" }}>
+        <div style={{ marginRight: "20px", flexShrink: 0 }}>
+          {movieDetails.poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+              alt={`${movieDetails.title} poster`}
+              style={{ width: "300px", height: "auto" }}
+            />
+          )}
+        </div>
+        <div style={{ flexGrow: 1 }}>
+          <h1>{movieDetails.title}</h1>
+          <p>
+            <strong>User Score:</strong> {movieDetails.vote_average}
+          </p>
+          <p>
+            <strong>Genre:</strong>{" "}
+            {movieDetails.genres.map((genre) => genre.name).join(", ")}
+          </p>
+          <p>
+            <strong>Overview:</strong> {movieDetails.overview}
+          </p>
+        </div>
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <Link to="cast" style={{ marginRight: "10px" }}>
+          Cast
+        </Link>
         <Link to="reviews">Reviews</Link>
       </div>
+      <div style={{ width: "100%" }}></div>
       <Outlet />
     </div>
   );

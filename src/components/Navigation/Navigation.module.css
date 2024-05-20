@@ -1,0 +1,13 @@
+.navcover {
+  border: 1px solid gray;
+  width: 1440px;
+  background-color: rgb(235, 232, 229);
+}
+
+.navlist {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}

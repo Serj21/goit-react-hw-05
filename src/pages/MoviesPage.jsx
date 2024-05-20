@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import MovieList from "../components/MovieList";
+import MovieList from "../components/MovieList/MovieList";
 
 const MoviesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,6 +37,7 @@ const MoviesPage = () => {
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Enter movie title..."
+          style={{ marginRight: "20px" }}
         />
         <button type="submit">Search</button>
       </form>
