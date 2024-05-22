@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Outlet, Link, useLocation } from "react-router-dom";
+import {
+  useParams,
+  Outlet,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const previousLocation = location.state?.from || "/movies";
 
   useEffect(() => {
@@ -33,11 +40,15 @@ const MovieDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
+  const handleGoBack = () => {
+    navigate(previousLocation);
+  };
+
   return (
     <div>
-      <Link to={previousLocation} style={{ margin: "20px" }}>
+      <button onClick={handleGoBack} style={{ margin: "20px" }}>
         Go back
-      </Link>
+      </button>
       <div style={{ display: "flex" }}>
         <div style={{ marginRight: "20px", flexShrink: 0 }}>
           {movieDetails.poster_path && (
@@ -63,10 +74,16 @@ const MovieDetailsPage = () => {
         </div>
       </div>
       <div style={{ marginTop: "20px" }}>
-        <Link to="cast" style={{ marginRight: "10px" }}>
+        <Link
+          to="cast"
+          state={{ from: previousLocation }}
+          style={{ marginRight: "10px" }}
+        >
           Cast
         </Link>
-        <Link to="reviews">Reviews</Link>
+        <Link to="reviews" state={{ from: previousLocation }}>
+          Reviews
+        </Link>
       </div>
       <div style={{ width: "100%" }}></div>
       <Outlet />
